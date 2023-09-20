@@ -24,14 +24,16 @@ def send_data(device):
     t = 0
     print("Sender serial port created!")
     while True:
-        sleep(2)
+        sleep(0.1)
         message = f"Hello {t}"
         print("Sending:", message)
+        message = message+"\n"
         sender.write(message.encode())
         t = t + 1
         if t > 10:
             break
     sender.close()
+    print("Sender thread finished")
 
 
 def read_data(device):
@@ -41,17 +43,17 @@ def read_data(device):
     the script finishes when 10 messages are received
     '''
     listener = serial.Serial(device, 9600)
-    t = 1
-    sleep(1)
+    t = 0
     print("Listener serial port created!")
     while True:
         data = listener.readline().decode().strip()
         if data:
             print(f"Received: {data}")
             t = t + 1
-            if t == 10:
+            if t > 10:
                 break
     listener.close()
+    print("Listener finished")
 
 
 # List available serial ports
@@ -65,7 +67,7 @@ else:
     for port in ports:
         print(port.device)
 
-    # Prompt the user to select two serial ports
+    # Set the ports to be used
     port1 = ports[0].device
     port2 = ports[1].device
     print("Port 1:", port1)
@@ -77,8 +79,8 @@ else:
         read_thread = threading.Thread(target=read_data, args=(port2,))
 
         # Start the threads
-        send_thread.start()
         read_thread.start()
+        send_thread.start()
 
     except serial.SerialException as e:
         print(f"Error opening serial ports: {e}")
