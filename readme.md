@@ -17,6 +17,9 @@ In a new terminal, use the following code to create a pair of serial ports conne
 sudo socat -d -d pty,raw,echo=0,link=/dev/ttyS0 pty,raw,echo=0,link=/dev/ttyS1
 ```
 
+## requirements
+The requirements for this script are on `requirements.txt`
+
 ## Script documentation
 
 ```bash
@@ -32,10 +35,10 @@ The script finishes when 10 messages where send and received
     Date: September 20, 2023
 
 FUNCTIONS
-read_data(device)
-This method runs as a thread, the input is the name of the serial port
-it creates a serial port instance and listens to messages over it
-the script finishes when 10 messages are received
+    read_data(device)
+        This method runs as a thread, the input is the name of the serial port
+        it creates a serial port instance and listens to messages over it
+        the script finishes when 10 messages are received
 
     send_data(device)
         This method runs as a thread, the input is the name of the serial port
