@@ -2,6 +2,13 @@
 
 > This script gets available ports then sends and receives data using the ports
 
+- [Serial communication test](#serial-communication-test)
+  - [Create virtual ports](#create-virtual-ports)
+  - [Requirements](#requirements)
+  - [Script documentation](#script-documentation)
+  - [Run the script](#run-the-script)
+
+
 ## Create virtual ports
 
 On Debian/Ubuntu distributions we can use socat to create virtual ports, using the command bellow
@@ -17,8 +24,8 @@ In a new terminal, use the following code to create a pair of serial ports conne
 sudo socat -d -d pty,raw,echo=0,link=/dev/ttyS0 pty,raw,echo=0,link=/dev/ttyS1
 ```
 
-## requirements
-The requirements for this script are on `requirements.txt`
+## Requirements
+Only `pyserial` was required it is also, shown on `requirements.txt`
 
 ## Script documentation
 
@@ -68,4 +75,10 @@ FILE
 
 ```bash
 pydoc main
+```
+
+## Run the script
+
+```bash
+python main.py
 ```
